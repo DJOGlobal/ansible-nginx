@@ -45,6 +45,12 @@
   notify:
    - reload nginx
   tags: [configuration,nginx]
+  
+- name: display multiple file contents
+  debug: var=item
+  with_file:
+    - "{{nginx_conf_dir}}/sites-enabled/secure.conf"
+    - "{{nginx_conf_dir}}/sites-enabled/default.conf"
 
 - name: Create the configurations for independent config file
   template: src=config.conf.j2 dest={{nginx_conf_dir}}/conf.d/{{ item }}.conf
